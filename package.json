@@ -1,8 +1,8 @@
 {
   "name": "hzbs-user-auth",
-  "version": "2.0.5",
+  "version": "2.1.0",
   "description": "get web auth",
-  "main": "src/index.js",
+  "main": "dist/userAuth.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx webpack --config ./config/webpack.config.js"
