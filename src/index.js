@@ -9,7 +9,7 @@
 
 // 获取事项权限
 function getItemInfo(axios, urlParams, domain, callback, topCallback, errorPage, next) {
-	const url = `${domain}/unite/${urlParams.itemNo}?srcCode=${urlParams.channelCode || 'hzeg'}&applicationId=${urlParams.applicationId || ''}&kg=1`;
+	const url = `${domain}/unite/${urlParams.itemNo}?srcCode=${urlParams.channelCode}&applicationId=${urlParams.applicationId}&kg=1`;
 	// 异常统一在axios里处理,这里不做处理
 	axios.post(url, urlParams).then(itemAuth => {
 		console.log('itemAuth res', itemAuth);
@@ -37,14 +37,14 @@ function getItemInfo(axios, urlParams, domain, callback, topCallback, errorPage,
 // 获取用户权限
 function vertifyUserAuth(axios, urlParams, domain, callback, next) {
 	if (process.env.NODE_ENV === 'development') {
-		const url = `${domain}/unite/${urlParams.itemNo}/11111111?srcCode=${urlParams.channelCode || 'hzeg'}&applicationId=${urlParams.applicationId || ''}&kg=1`;
+		const url = `${domain}/unite/${urlParams.itemNo}/11111111?srcCode=${urlParams.channelCode}&applicationId=${urlParams.applicationId}&kg=1`;
 		axios.post(url, urlParams).then(userAuth => {
 			console.log('userAuth res', userAuth);
 		})
 	} else {
 		window.yl.call('getAuthcode', {}, {
 			onSuccess: (res) => {
-				const url = `${domain}/unite/${urlParams.itemNo}/${res.param.authCode}?srcCode=${urlParams.channelCode || 'hzeg'}&applicationId=${urlParams.applicationId || ''}&kg=1`;
+				const url = `${domain}/unite/${urlParams.itemNo}/${res.param.authCode}?srcCode=${urlParams.channelCode}&applicationId=${urlParams.applicationId}&kg=1`;
 				// 异常统一在axios里处理,这里不做处理
 				axios.post(url, urlParams).then(userAuth => {
 					console.log('userAuth res', userAuth);
