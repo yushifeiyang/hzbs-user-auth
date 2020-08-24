@@ -1,6 +1,6 @@
 {
   "name": "hzbs-user-auth",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "get web auth",
   "main": "dist/userAuth.js",
   "scripts": {
