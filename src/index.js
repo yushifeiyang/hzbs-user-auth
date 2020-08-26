@@ -66,6 +66,7 @@ function vertifyUserAuth(axios, urlParams, domain, callback, next, isJQuery) {
 		const url = `${domain}/unite/${urlParams.itemNo}/11111111?srcCode=${urlParams.channelCode}&applicationId=${urlParams.applicationId}&kg=1`;
 		axios.post(url, urlParams).then(userAuth => {
 			console.log('userAuth res', userAuth);
+			userAuthHanddle(userAuth, callback, next);
 		})
 	} else {
 		window.yl.call('getAuthcode', {}, {
@@ -82,13 +83,13 @@ function vertifyUserAuth(axios, urlParams, domain, callback, next, isJQuery) {
 						data: urlParams,
 						crossDomain: true,
 						success: function (userAuth) {
-							userAuthHanddle(userAuth, null);
+							userAuthHanddle(userAuth, callback, null);
 						}
 					});
 				} else {
 					axios.post(url, urlParams).then(userAuth => {
 						console.log('userAuth res', userAuth);
-						userAuthHanddle(userAuth, next);
+						userAuthHanddle(userAuth, callback, next);
 					});
 				}
 			},
@@ -100,7 +101,8 @@ function vertifyUserAuth(axios, urlParams, domain, callback, next, isJQuery) {
 	}
 }
 
-function userAuthHanddle(userAuth, next) {
+function userAuthHanddle(userAuth, callback, next) {
+	// console.log('userAuthHanddle===', userAuth);
 	if (userAuth.errorCode.toString() === '0') {
 		callback(next);
 	} else if (userAuth.errorCode.toString() === '10001') {
@@ -137,7 +139,7 @@ function userAuthHanddle(userAuth, next) {
 			next({
 				path: '/submitFail',
 				query: {
-					errorMsg: res.value
+					errorMsg: userAuth.value
 				}
 			})
 		} else {
