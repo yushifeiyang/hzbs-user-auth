@@ -102,7 +102,7 @@ function vertifyUserAuth(axios, urlParams, domain, callback, next, isJQuery) {
 }
 
 function userAuthHanddle(userAuth, callback, next) {
-	// console.log('userAuthHanddle===', userAuth);
+	console.log('userAuthHanddle');
 	if (userAuth.errorCode.toString() === '0') {
 		callback(next);
 	} else if (userAuth.errorCode.toString() === '10001') {
